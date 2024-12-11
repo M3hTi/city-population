@@ -9,7 +9,13 @@ function getInfo(e) {
         e.preventDefault();
         const cityValue = searchInput.value
         try {
-            if(cityValue === '') throw new Error("Pls Enter Your City Name")
+            if(cityValue === '') {
+                const existingDetails = document.querySelector('.city-details');
+                if (existingDetails) {
+                    existingDetails.remove();
+                }
+                throw new Error("Pls Enter Your City Name")
+            }
             fetch(`https://api.api-ninjas.com/v1/city?name=${cityValue}`,{
                 method: 'GET',
                 headers: {
